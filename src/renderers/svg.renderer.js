@@ -434,6 +434,7 @@ export function renderTrophyRow({ x, y, width, height, data }) {
     repos: 'M4 4v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-4H6c-1.1 0-2 .9-2 2zm9 0l5 4h-5V4zM7 8h4v2H7V8zm0 4h10v2H7v-2zm0 4h10v2H7v-2z',
     stars: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
     followers: 'M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z',
+    reviews: 'M21 6h-2v9H7v2c0 .55.45 1 1 1h9l4 4V7c0-.55-.45-1-1-1zM17 11V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z',
   };
 
   // thresholds for each trophy type
@@ -444,11 +445,12 @@ export function renderTrophyRow({ x, y, width, height, data }) {
     repos: { s: 100, a: 50, b: 20, c: 5 },
     stars: { s: 1000, a: 500, b: 100, c: 20 },
     followers: { s: 1000, a: 500, b: 100, c: 20 },
+    reviews: { s: 200, a: 100, b: 50, c: 10 },
   };
 
   const trophySize = 70;
-  const trophyGap = 24;
-  const totalTrophies = 6;
+  const trophyGap = 16;
+  const totalTrophies = 7;
   const totalWidth = (trophySize * totalTrophies) + (trophyGap * (totalTrophies - 1));
   const startX = x + (width - totalWidth) / 2;
 
@@ -456,6 +458,7 @@ export function renderTrophyRow({ x, y, width, height, data }) {
   const trophies = [
     { key: 'commits', label: 'Commits', value: data.commits },
     { key: 'prs', label: 'PRs', value: data.prs },
+    { key: 'reviews', label: 'Reviews', value: data.reviews },
     { key: 'issues', label: 'Issues', value: data.issues },
     { key: 'repos', label: 'Repos', value: data.repos },
     { key: 'stars', label: 'Stars', value: data.stars },

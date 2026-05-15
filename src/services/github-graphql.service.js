@@ -1,18 +1,18 @@
 // GitHub GraphQL API Service - Contribution Calendar & Streaks
 
-import { githubCache } from '../utils/cache.js';
+import { githubCache } from "../utils/cache.js";
 
-const GITHUB_GRAPHQL_URL = 'https://api.github.com/graphql';
+const GITHUB_GRAPHQL_URL = "https://api.github.com/graphql";
 
 /* authorization headers for GraphQL API*/
 function getHeaders() {
   const headers = {
-    'Content-Type': 'application/json',
-    'User-Agent': 'samdev-pulse',
+    "Content-Type": "application/json",
+    "User-Agent": "samdev-pulse",
   };
 
   if (process.env.GITHUB_TOKEN) {
-    headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`;
+    headers["Authorization"] = `Bearer ${process.env.GITHUB_TOKEN}`;
   }
 
   return headers;
@@ -51,11 +51,11 @@ query($username: String!) {
 /* fetch contribution data from GitHub GraphQL API */
 async function fetchContributionData(username) {
   if (!process.env.GITHUB_TOKEN) {
-    throw new Error('GITHUB_TOKEN required for contribution data');
+    throw new Error("GITHUB_TOKEN required for contribution data");
   }
 
   const response = await fetch(GITHUB_GRAPHQL_URL, {
-    method: 'POST',
+    method: "POST",
     headers: getHeaders(),
     body: JSON.stringify({
       query: CONTRIBUTION_QUERY,
@@ -64,14 +64,14 @@ async function fetchContributionData(username) {
   });
 
   // handles rate limits silently
-  const rateLimitRemaining = response.headers.get('x-ratelimit-remaining');
+  const rateLimitRemaining = response.headers.get("x-ratelimit-remaining");
   if (rateLimitRemaining && parseInt(rateLimitRemaining, 10) < 10) {
     // rate limit warning suppressed for production
   }
 
   if (!response.ok) {
     if (response.status === 403) {
-      throw new Error('GitHub API rate limit exceeded');
+      throw new Error("GitHub API rate limit exceeded");
     }
     throw new Error(`GitHub GraphQL API error: ${response.status}`);
   }
@@ -79,7 +79,7 @@ async function fetchContributionData(username) {
   const json = await response.json();
 
   if (json.errors) {
-    throw new Error(json.errors[0]?.message || 'GraphQL query failed');
+    throw new Error(json.errors[0]?.message || "GraphQL query failed");
   }
 
   return json.data?.user;
@@ -108,8 +108,8 @@ function flattenContributionDays(calendar) {
 function calculateCurrentStreak(days) {
   if (days.length === 0) return 0;
 
-  const today = new Date().toISOString().split('T')[0];
-  const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
+  const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
 
   let streak = 0;
   let foundStart = false;
@@ -183,6 +183,7 @@ function normalizeContributionData(userData) {
     totalContributionDays: calculateTotalContributionDays(days),
     totalCommits: collection?.totalCommitContributions || 0,
     totalPRs: collection?.totalPullRequestContributions || 0,
+    totalReviews: collection?.totalPullRequestReviewContributions || 0,
     totalIssues: collection?.totalIssueContributions || 0,
     prsMerged: userData?.pullRequests?.totalCount || 0,
     issuesClosed: userData?.issues?.totalCount || 0,
@@ -206,7 +207,7 @@ export async function getContributionData(username) {
     if (!userData) {
       return {
         success: false,
-        error: 'User not found or no contribution data',
+        error: "User not found or no contribution data",
       };
     }
 
@@ -222,8 +223,7 @@ export async function getContributionData(username) {
   } catch (error) {
     return {
       success: false,
-      error: error.message || 'Failed to fetch contribution data',
+      error: error.message || "Failed to fetch contribution data",
     };
   }
 }
-

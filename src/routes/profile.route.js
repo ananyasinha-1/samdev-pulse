@@ -189,6 +189,8 @@ const height = hideTrophies
     repos: data.publicRepos || 0,
     stars: data.totalStars || 0,
     followers: data.followers || 0,
+    reviews:
+  contributionData?.totalReviews || 0,
   };
 
 
