@@ -124,9 +124,8 @@
               <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
             </svg>
           </div>
-          <h3 class="feature-title">LeetCode Integration</h3>
-          <p class="feature-description">Showcase your problem-solving skills with total solved, difficulty breakdown,
-            and contest ratings.</p>
+          <h3 class="feature-title">Competitive Programming</h3>
+          <p class="feature-description">Showcase your LeetCode, Codeforces, and CodeChef stats with an adaptive, clean layout.</p>
         </div>
 
         <div class="feature-card">
@@ -426,6 +425,18 @@
                 placeholder="Leave empty to disable" />
             </div>
             <div class="input-group">
+              <label for="codeforces">Codeforces Username (Optional)</label>
+              <input id="codeforces" name="codeforces" type="text" autocomplete="off" spellcheck="false"
+                placeholder="Leave empty to disable" />
+            </div>
+          </div>
+          <div class="input-row">
+            <div class="input-group">
+              <label for="codechef">CodeChef Username (Optional)</label>
+              <input id="codechef" name="codechef" type="text" autocomplete="off" spellcheck="false"
+                placeholder="Leave empty to disable" />
+            </div>
+            <div class="input-group">
               <label for="align-select">Alignment</label>
               <select id="align-select">
                 <option value="left">Left</option>
@@ -504,10 +515,10 @@
 
         <div class="usage-card">
           <div class="usage-step">3</div>
-          <h3 class="usage-title">With LeetCode</h3>
-          <p class="usage-description">Show off your problem-solving prowess:</p>
+          <h3 class="usage-title">With CP Stats</h3>
+          <p class="usage-description">Show off your competitive programming stats:</p>
           <pre
-            class="code-block"><code>![samdev-pulse](https://samdev-pulse.vercel.app/api/profile?username=YOUR_USERNAME&leetcode=YOUR_LEETCODE_USERNAME)</code></pre>
+            class="code-block"><code>![samdev-pulse](https://samdev-pulse.vercel.app/api/profile?username=YOUR_USERNAME&leetcode=YOUR_LEETCODE_USERNAME&codeforces=YOUR_CF_USERNAME)</code></pre>
         </div>
 
         <div class="usage-card">
@@ -547,7 +558,19 @@
               <td><code>leetcode</code></td>
               <td>string</td>
               <td>-</td>
-              <td>LeetCode username (or "false" to disable)</td>
+              <td>LeetCode username</td>
+            </tr>
+            <tr>
+              <td><code>codeforces</code></td>
+              <td>string</td>
+              <td>-</td>
+              <td>Codeforces username</td>
+            </tr>
+            <tr>
+              <td><code>codechef</code></td>
+              <td>string</td>
+              <td>-</td>
+              <td>CodeChef username</td>
             </tr>
             <tr>
               <td><code>align</code></td>
