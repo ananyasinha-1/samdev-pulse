@@ -1317,10 +1317,11 @@ td code {
 }
 
 @media (max-width: 480px) {
-  .btn {
-    width: 100%;
-    justify-content: center;
-  }
+  .hero-cta .btn,
+  .cta-buttons .btn {
+  width: 100%;
+  justify-content: center;
+}
 
   .preview-panel {
     padding: var(--spacing-lg);
