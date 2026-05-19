@@ -957,10 +957,12 @@ section {
   border-radius: var(--radius-lg);
   padding: var(--spacing-2xl);
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .params-table table {
-  min-width: 720px;
+  min-width: 500px;
+  width: 100%;
   margin-top: 15px;
 }
 
@@ -1100,6 +1102,14 @@ td code {
   border-radius: var(--radius-lg);
   object-fit: cover;
   display: block;
+}
+
+@media (max-width: 768px) {
+.profile-avatar {
+    max-width: 240px;
+    width: 80%;     
+    margin: 0 auto;
+  }
 }
 
 /* ===== CTA Section ===== */
@@ -1294,10 +1304,12 @@ td code {
     font-size: 1.1rem;
   }
 
-  .usage-card .code-block {
+.usage-card .code-block {
     font-size: 0.9rem;
-    word-break: break-word;
     white-space: pre-wrap;
+    word-break: break-all;
+    overflow-wrap: anywhere; 
+    overflow-x: auto;
   }
 
   .footer-content {
@@ -1313,18 +1325,23 @@ td code {
     padding: var(--spacing-sm);
   }
 
-
-  .params-table table {
-    min-width: 520px;
-  }
 }
 
 @media (max-width: 480px) {
-  .btn {
+  .hero-cta .btn,
+  .cta-buttons .btn {
     width: 100%;
     justify-content: center;
   }
 
+  .copy-btn, 
+  .preview-update-row .btn {
+    width: auto !important;
+    display: inline-flex;
+  }
+  .preview-update-row {
+    justify-content: center;
+  }
   .preview-panel {
     padding: var(--spacing-lg);
   }
@@ -1335,10 +1352,6 @@ td code {
 
   .params-title {
     font-size: 1.25rem;
-  }
-
-  .params-table table {
-    min-width: 460px;
   }
 }
 
