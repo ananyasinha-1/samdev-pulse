@@ -1103,6 +1103,13 @@ td code {
   display: block;
 }
 
+@media (max-width: 768px) {
+  .profile-avatar {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
+
 /* ===== CTA Section ===== */
 .cta-section {
   background: var(--bg-primary);
