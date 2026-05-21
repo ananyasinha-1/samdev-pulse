@@ -230,6 +230,37 @@
     }
   }
 
+function setupThemeCardClicks() {
+  document.querySelectorAll('.theme-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const theme = card.dataset.theme || '';
+
+      // Update the dropdown
+      if (themeSelect) {
+        themeSelect.value = theme;
+        updateSnippetOnly();
+      }
+
+      // Scroll to preview section
+      const previewSection = document.getElementById('preview');
+      if (previewSection) {
+        previewSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      if (usernameInput && usernameInput.value.trim()) {
+        updatePreview();
+      }
+    });
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+}
+
   /* Sets up smooth scrolling for anchor links */
   function setupSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -297,6 +328,8 @@
 
     // Set up real-time snippet sync on every input change
     setupRealTimeSync();
+
+    setupThemeCardClicks();
 
     if (usernameInput && usernameInput.value.trim()) {
       updateSnippetOnly();
