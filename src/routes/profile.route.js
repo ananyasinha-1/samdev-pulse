@@ -35,8 +35,6 @@ router.use((req, res, next) => {
   next();
 });
 
-const DEFAULT_USERNAME = process.env.DEFAULT_USERNAME || 'SamXop123';
-
 function formatNumber(num) {
   if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
   if (num >= 1000) return (num / 1000).toFixed(1) + 'k';
@@ -70,7 +68,7 @@ router.get('/', async (req, res) => {
     codeforces,
     codechef,
     shouldRenderLeetCode,
-  } = normalizeProfileQuery(req.query, { defaultUsername: DEFAULT_USERNAME });
+  } = normalizeProfileQuery(req.query);
   setTheme(theme);
 
   if (!isUsernameValid) {
