@@ -35,7 +35,7 @@ describe('query-validation.js', () => {
     expect(normalizeGitHubUsername('a'.repeat(39), 'SamXop123')).toEqual({ username: 'a'.repeat(39), isValid: true });
 
     // Empty values use fallback default
-    expect(normalizeGitHubUsername('', 'SamXop123')).toEqual({ username: 'SamXop123', isValid: true });
+    expect(normalizeGitHubUsername('', 'SamXop123')).toEqual({ username: '', isValid: false });
 
     // Invalid usernames
     expect(normalizeGitHubUsername('bad/name', 'SamXop123')).toEqual({ username: 'bad/name', isValid: false });
@@ -81,21 +81,55 @@ describe('query-validation.js', () => {
     });
   });
 
+  test('normalizeProfileQuery rejects missing username', () => {
+    const result = normalizeProfileQuery(
+      {},
+      { defaultUsername: 'SamXop123' }
+    );
+
+    expect(result.isUsernameValid).toBe(false);
+    expect(result.username).toBe('');
+  });
+
   test('normalizeProfileQuery rejects invalid platform handles securely', () => {
     // Invalid leetcode injection
-    const q1 = normalizeProfileQuery({ leetcode: '<script>alert(1)</script>' }, { defaultUsername: 'SamXop123' });
+    const q1 = normalizeProfileQuery(
+      {
+        username: 'SamXop123',
+        leetcode: '<script>alert(1)</script>'
+      },
+      { defaultUsername: 'SamXop123' }
+    );
     expect(q1.isUsernameValid).toBe(false);
 
     // Invalid codeforces handle
-    const q2 = normalizeProfileQuery({ codeforces: 'bad.user!' }, { defaultUsername: 'SamXop123' });
+    const q2 = normalizeProfileQuery(
+      {
+        username: 'SamXop123',
+        codeforces: 'bad.user!'
+      },
+      { defaultUsername: 'SamXop123' }
+    );
     expect(q2.isUsernameValid).toBe(false);
 
     // Overlong platform handle (41 characters)
-    const q3 = normalizeProfileQuery({ codechef: 'a'.repeat(41) }, { defaultUsername: 'SamXop123' });
+    const q3 = normalizeProfileQuery(
+      {
+        username: 'SamXop123',
+        codechef: 'a'.repeat(41)
+      },
+      { defaultUsername: 'SamXop123' }
+    );
     expect(q3.isUsernameValid).toBe(false);
 
     // Valid handles with letters, numbers, underscore, hyphen
-    const q4 = normalizeProfileQuery({ leetcode: 'user_1-2' }, { defaultUsername: 'SamXop123' });
+    const q4 = normalizeProfileQuery(
+      {
+        username: 'SamXop123',
+        leetcode: 'user_1-2'
+      },
+      { defaultUsername: 'SamXop123' }
+    );
     expect(q4.isUsernameValid).toBe(true);
   });
 });
