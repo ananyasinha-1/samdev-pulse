@@ -39,6 +39,7 @@ export function normalizeAlign(value) {
 
 export function normalizeGitHubUsername(value) {
   const username = normalizeString(value);
+
   if (!username) {
     return { username: '', isValid: false };
   }
