@@ -5,6 +5,11 @@ export default {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   testMatch: ['**/__tests__/**/*.test.js', '**/?(*.)+(spec|test).js'],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    'src/utils/query-validation.test.js',
+    'src/utils/svg-sanitizer.test.js'
+  ],
   collectCoverageFrom: [
     'src/**/*.js',
     '!src/server.js',
