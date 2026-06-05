@@ -39,6 +39,10 @@ import pastelDreamTheme from '../themes/pasteldream.theme.js';
 import { sanitizeSvgValue, sanitizeSvgHref } from '../utils/svg-sanitizer.js';
 import { validateThemeAccessibility }
   from '../utils/theme-accessibility.js';
+
+import { cobalt2 } from '../themes/cobalt2.js';
+import { oneDark } from '../themes/one-dark.js';
+import { githubLight } from '../themes/github-light.js';  
 const LAYOUT = {
   width: 960,
   padding: 28,
@@ -69,6 +73,9 @@ const themes = {
   emberglow: emberGlowTheme,
   midnightneon: midnightNeonTheme,
   pasteldream: pastelDreamTheme,
+  'cobalt2': cobalt2,
+  'one-dark': oneDark,
+  'github-light': githubLight,
 };
 Object.entries(themes).forEach(
   ([name, theme]) => {
