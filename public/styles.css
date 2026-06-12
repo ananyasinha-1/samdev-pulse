@@ -1905,7 +1905,8 @@ html {
 }
 
 .theme-search-suggestion:hover,
-.theme-search-suggestion:focus-visible {
+.theme-search-suggestion:focus-visible,
+.theme-search-suggestion.highlighted {
   background: rgba(124, 58, 237, 0.16);
   color: var(--text-primary);
   outline: none;
